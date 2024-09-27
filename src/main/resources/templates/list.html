@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자동차 목록</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            /*background-color: #4CAF50;*/
+            background-color: #3495db;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        .car-list {
+            padding: 2rem;
+            flex: 1;
+        }
+
+        .car-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .car-item h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .car-item p {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+        }
+
+        h2 {
+            cursor: pointer; /* 커서가 포인터로 바뀌어 클릭 가능한 영역임을 명확히 표시 */
+        }
+
+    </style>
+
+</head>
+<body>
+<script>
+    function detailCar(id) {
+        console.log('id ', id)
+        location.href= '/detailItem/' + id;
+    }
+</script>
+<header>
+    <h1>자동차</h1>
+</header>
+
+<section class="car-list">
+    <article class="car-item" th:each="item : ${items}" >
+        <img th:src="${item.image}" alt="차 이미지" style="width:100%; height:auto; margin-bottom:1rem;">
+        <h2 th:text="'차 이름: ' + ${item.car}" th:id="${item.id}" th:onclick="detailCar(this.getAttribute('id'))"></h2>
+        <p><strong>가격:</strong> <span th:text="${#numbers.formatInteger(item.price, 3, 'COMMA')}">100,000,000</span> 원</p>
+        <p><strong>제조사:</strong> <span th:text="${item.manufacturing_company}">Tesla</span></p>
+        <p><strong>설명:</strong> <span th:text="${item.explanation}">전기차로 높은 성능과 긴 주행거리를 자랑합니다.</span></p>
+        <p><strong>생성 날짜:</strong> <span th:text="${item.release_date}">2024-01-15</span></p>
+    </article>
+
+
+</section>
+
+<footer>
+    <p>&copy; 2024. 자동차 목록 페이지</p>
+</footer>
+</body>
+</html>

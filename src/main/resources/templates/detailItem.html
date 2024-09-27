@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자동차 상세 정보</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #3498db;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .menu-icon {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* 사이드 네비게이션 스타일 */
+    .sidenav {
+      height: 100%; /* 전체 높이 */
+      width: 0; /* 초기 너비는 0으로 설정하여 숨김 */
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      right: 0; /* 오른쪽에서 나타나도록 설정 */
+      background-color: #111;
+      overflow-x: hidden;
+      transition: 0.5s; /* 슬라이드 효과를 위한 트랜지션 */
+      padding-top: 60px; /* 상단 패딩 */
+    }
+
+    .sidenav a {
+      padding: 8px 32px;
+      text-decoration: none;
+      font-size: 1.5rem;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .sidenav a:hover {
+      color: #f1f1f1;
+    }
+
+    .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 15px;
+      font-size: 3rem;
+      margin-left: 50px;
+      color: white;
+    }
+
+    .car-detail-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      max-width: 800px;
+      margin: 2rem auto;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .car-image {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+
+    .car-info {
+      text-align: left;
+      width: 100%;
+    }
+
+    .car-info h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .car-info p {
+      margin-bottom: 1rem;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.2rem;
+      background-color: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #2980b9;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: auto;
+      width: 100%;
+    }
+
+  </style>
+</head>
+<body>
+<script>
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+  }
+
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+  }
+</script>
+<header>
+  <h1>자동차 상세 정보</h1>
+  <div class="menu-icon" onclick="openNav()">&#9776;</div>
+</header>
+
+<!-- 사이드 네비게이션 메뉴 -->
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="/login">로그인</a>
+  <a href="/addItem">자동차 추가</a>
+</div>
+
+<div class="car-detail-container">
+  <!-- 자동차 이미지 -->
+  <img th:src="${item.image}" alt="Tesla Model S" class="car-image">
+
+  <!-- 자동차 정보 -->
+  <div class="car-info" >
+    <h2 th:text="'차 이름: ' + ${item.car}">차 이름: Tesla Model S</h2>
+    <p><strong>가격:</strong> <span th:text="${#numbers.formatInteger(item.price, 3, 'COMMA')}">100,000,000</span> 원</p>
+    <p><strong>제조사:</strong> <span th:text="${item.manufacturing_company}">Tesla</span></p>
+    <p><strong>설명:</strong> <span th:text="${item.explanation}">전기차로 높은 성능과 긴 주행거리를 자랑합니다.</span></p>
+    <p><strong>생성 날짜:</strong> <span th:text="${item.release_date}">2024-01-15</span></p>
+  </div>
+
+  <!-- 돌아가기 버튼 -->
+  <a href="/list" class="back-button">목록으로 돌아가기</a>
+</div>
+<footer>
+  <p>&copy; 2024. 자동차 목록 페이지</p>
+</footer>
+</body>
+</html>
