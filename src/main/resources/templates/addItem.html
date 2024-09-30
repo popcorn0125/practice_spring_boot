@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDS - 상품 추가</title>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* 헤더 */
+        .navbar {
+            background-color: #343a40;
+        }
+        .navbar-brand img {
+            height: 50px;
+        }
+        .navbar-nav .nav-link {
+            color: white;
+            font-size: 1.2rem;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #f8f9fa;
+        }
+        /* 상품 정보 입력 필드 */
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+        .btn-submit {
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .btn-submit:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+        .form-control {
+            border: 2px solid #007bff;
+            background-color: #f8f9fa;
+            color: black;
+        }
+        .form-control:focus {
+            border-color: #0056b3;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+    </style>
+</head>
+<body>
+<!-- 헤더 -->
+<nav th:replace="~{header.html :: header}"></nav>
+<!-- 상품 정보 입력 필드 -->
+<div class="container">
+    <h2>상품 정보 입력</h2>
+    <form action="/addItem" method="POST">
+        <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <textarea id="image" name="image" class="form-control"
+                      required  ></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="car" class="form-label">Car</label>
+            <input type="text" id="car" name="car" class="form-control"
+                   required>
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" id="price" name="price"
+                   class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="manufacturing_company"
+                   class="form-label">Manufacturing Company</label>
+            <input type="text" id="manufacturing_company"
+                   name="manufacturing_company" class="form-control" maxlength="100" required>
+        </div>
+        <div class="mb-3">
+            <label for="release_date" class="form-label">Release Date</label>
+            <input type="date" id="release_date" name="release_date"
+                   class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-submit">추가</button>
+    </form>
+</div>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.mi
+n.js"></script>
+</body>
+</html>

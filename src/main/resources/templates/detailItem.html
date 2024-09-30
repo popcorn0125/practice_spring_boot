@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDS - 상품 상세 정보</title>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* 헤더 */
+        .navbar {
+            background-color: #343a40;
+        }
+        .navbar-brand img {
+            height: 50px;
+        }
+        .navbar-nav .nav-link {
+            color: white;
+            font-size: 1.2rem;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #f8f9fa;
+        }
+        /* 상품 상세 정보 */
+        .container {
+            max-width: 800px;
+            margin-top: 50px;
+        }
+        .item-detail {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .item-detail img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .item-info {
+            width: 100%;
+        }
+        .item-info p {
+            font-size: 1.2rem;
+        }
+        .btn-back {
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .btn-back:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<!-- 헤더 -->
+<nav th:replace="~{header.html :: header}"></nav>
+<!-- 상품 상세 정보 -->
+<div class="container">
+    <h2>상품 상세 정보</h2>
+    <div class="item-detail">
+        <img th:src="${item.image}" alt="상품 이미지" />
+        <div class="item-info">
+            <p><strong>차량명:</strong> <span
+                    th:text="${item.car}"></span></p>
+            <p><strong>가격:</strong> <span th:text="${#numbers.formatInteger(item.price, 3, 'COMMA')} + '원'"></span></p>
+            <p><strong>제조사:</strong> <span
+                    th:text="${item.manufacturing_company}"></span></p>
+            <p><strong>출시일:</strong> <span
+                    th:text="${item.release_date}"></span></p>
+        </div>
+    </div>
+    <a href="/list" class="btn-back">상품 목록</a>
+</div>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
